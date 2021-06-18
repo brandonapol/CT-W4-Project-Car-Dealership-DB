@@ -1,0 +1,48 @@
+-- Create 4 customers via function
+SELECT add_customer(1, 'Brandon', 'Apol')
+SELECT add_customer(2, 'Lydia', 'Fitzwilliam')
+SELECT add_customer(3, 'Elayne', 'Heynen')
+SELECT add_customer(4, 'Josh', 'Heynen')
+SELECT add_customer(5, 'Jacob', 'Buller')
+SELECT add_customer(6, 'Heatmiser', '\U0001f525')
+SELECT *
+FROM customer;
+
+-- Create 4 cars via function
+SELECT add_car(1001, 'Volkswagen', 'Jetta', 'Black', 2015, 8000.00)
+SELECT add_car(1002, 'Subaru', 'Impreza', 'Blue', 2017, 5000.00) -- My wife and I call it the 'bluebaru', also sometimes 'sufjan' because of the swim teacher in Eugene by Sufjan Stevens - world needed to be set back into balance also the SQL thing limited me to a 4 digit number even though I set it to 6 digits
+SELECT add_car(1003, 'Honda', 'Accord', 'Grey', 1998, 1000.00) -- my sister calls it Henry and it has 300,000 miles on it
+SELECT add_car(1004, 'Volkswagen', 'Jetta', 'Blue', 2012, 3500.00)
+SELECT add_car(1005, 'Subaru', 'Outback', 'Rust and Duct Tape', 1817, 30.00) -- not sure if Jacob's alaskamobile is actually from 1817 but it needs to die
+SELECT *
+FROM car
+
+-- Create 4 staff members via function
+SELECT add_staff(101, 'Ryan', 'Rhoades')
+SELECT add_staff(102, 'Joel', 'Carter')
+SELECT add_staff(103, 'Terrell', 'McKinney')
+SELECT add_staff(104, 'Shoha', 'Tsuchida')
+SELECT *
+FROM sales_person
+
+-- Create some mechanics (in retrospect we're not really making mechanics just work tickets)
+SELECT add_mechanic(201, 1003, 3) 
+SELECT add_mechanic(202, 1002, 2)
+SELECT add_mechanic(5, 1005, 5) -- Jacob is an airplane mechanic and that's the only reason his car runs at all
+SELECT *
+FROM mechanic
+
+
+-- Create some auto parts via function
+SELECT add_part(2001, 'Wheels rotated', 201, 1002, 2, 30.00)
+SELECT add_part(2002, 'Duct Tape added', 5, 1005, 5, 60.00)
+
+SELECT *
+FROM parts
+
+-- Create some invoices for Jacob and Lydia
+SELECT add_invoice(301, 'Wheels rotated', 2, 3001, 'CCD', CURRENT_DATE, 30.00, 2001, 104, 1002) -- thank you shoha
+SELECT add_invoice(302, 'Duct Tape added', 5, 3002, 'CASH', CURRENT_DATE, 60.00, 2002, 101, 1005) -- duct tape expensive thanks tho ryan
+SELECT *
+FROM invoice
+

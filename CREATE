@@ -1,0 +1,58 @@
+CREATE TABLE car (
+	car_serial SERIAL PRIMARY KEY,
+	make VARCHAR(20),
+	model VARCHAR(20),
+	color VARCHAR(20),
+	_year INTEGER,
+	car_amount NUMERIC(6,2)
+);
+
+CREATE TABLE sales_person (
+	staff_id SERIAL PRIMARY KEY,
+	first_name VARCHAR(100),
+	last_name VARCHAR(150)
+);
+
+CREATE TABLE customer (
+  customer_id SERIAL PRIMARY KEY,
+  first_name VARCHAR(100),
+  last_name VARCHAR(150)
+);
+
+CREATE TABLE mechanic (
+	mechanic_id SERIAL PRIMARY KEY,
+	car_serial INTEGER NOT NULL,
+	customer_id INTEGER NOT NULL,
+	FOREIGN KEY(car_serial) REFERENCES car(car_serial),
+	FOREIGN KEY(customer_id) REFERENCES customer(customer_id)
+);
+
+CREATE TABLE parts (
+	part_id SERIAL PRIMARY KEY,
+	work_done VARCHAR(250),
+	mechanic_id INTEGER NOT NULL,
+	car_serial INTEGER NOT NULL,
+	customer_id INTEGER NOT NULL,
+	parts_amount NUMERIC(6,2),
+	FOREIGN KEY(mechanic_id) REFERENCES mechanic(mechanic_id),
+	FOREIGN KEY(car_serial) REFERENCES car(car_serial),
+	FOREIGN KEY(customer_id) REFERENCES customer(customer_id)
+);
+
+CREATE TABLE invoice (
+	invoice_id SERIAL PRIMARY KEY,
+	invoice_type VARCHAR(20),
+	customer_id INTEGER NOT NULL,
+	payment_id INTEGER,
+	payment_type VARCHAR(20),
+	payment_date DATE DEFAULT CURRENT_DATE,
+	total_amount NUMERIC(6,2),
+	part_id INTEGER NOT NULL,
+	staff_id INTEGER NOT NULL,
+	car_serial INTEGER NOT NULL,
+	FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
+	FOREIGN KEY(part_id) REFERENCES parts(part_id),
+	FOREIGN KEY(staff_id) REFERENCES sales_person(staff_id),
+	FOREIGN KEY(car_serial) REFERENCES car(car_serial)
+);
+

@@ -1,0 +1,117 @@
+-- Create a customer
+
+CREATE OR REPLACE FUNCTION add_customer(
+	_customer_id INTEGER,
+	_first_name VARCHAR,
+	_last_name VARCHAR
+)
+RETURNS void
+--Declaration
+AS $MAIN$
+	BEGIN
+-- BODY
+		INSERT INTO customer(customer_id, first_name, last_name)
+		VALUES(_customer_id, _first_name, _last_name);
+	END;
+$MAIN$
+LANGUAGE plpgsql;
+
+
+
+-- Create a new staff member
+CREATE OR REPLACE FUNCTION add_staff(
+	_staff_id INTEGER,
+	_first_name VARCHAR,
+	_last_name VARCHAR
+)
+RETURNS void
+--Declaration
+AS $MAIN$
+	BEGIN
+-- BODY
+		INSERT INTO sales_person(staff_id, first_name, last_name)
+		VALUES(_staff_id, _first_name, _last_name);
+	END;
+$MAIN$
+LANGUAGE plpgsql;
+
+-- Create a new car
+CREATE OR REPLACE FUNCTION add_car(
+	_car_serial INTEGER,
+	_make VARCHAR,
+	_model VARCHAR,
+	_color VARCHAR,
+	_year_ INTEGER,
+	_car_amount NUMERIC(8,2)
+)
+RETURNS void
+--Declaration
+AS $MAIN$
+	BEGIN
+-- BODY
+		INSERT INTO car(car_serial, make, model, color, _year, car_amount)
+		VALUES(_car_serial, _make, _model, _color, _year_, _car_amount);
+	END;
+$MAIN$
+LANGUAGE plpgsql;
+
+-- Create a new part
+CREATE OR REPLACE FUNCTION add_part(
+	_part_id INTEGER,
+	_work_done VARCHAR,
+	_mechanic_id INTEGER,
+	_car_serial INTEGER,
+	_customer_id INTEGER,
+	_parts_amount NUMERIC(6,2)
+)
+RETURNS void
+--Declaration
+AS $MAIN$
+	BEGIN
+-- BODY
+		INSERT INTO parts(part_id, work_done, mechanic_id, car_serial, customer_id, parts_amount)
+		VALUES(_part_id, _work_done, _mechanic_id, _car_serial, _customer_id, _parts_amount);
+	END;
+$MAIN$
+LANGUAGE plpgsql;
+
+-- Create a new mechanic
+CREATE OR REPLACE FUNCTION add_mechanic(
+	_mechanic_id INTEGER,
+	_car_serial INTEGER,
+	_customer_id INTEGER
+)
+RETURNS void
+--Declaration
+AS $MAIN$
+	BEGIN
+-- BODY
+		INSERT INTO mechanic(mechanic_id, car_serial, customer_id)
+		VALUES(_mechanic_id, _car_serial, _customer_id);
+	END;
+$MAIN$
+LANGUAGE plpgsql;
+
+-- Create a new invoice
+CREATE OR REPLACE FUNCTION add_invoice(
+	_invoice_id INTEGER,
+	_invoice_type VARCHAR(20),
+	_customer_id INTEGER,
+	_payment_id INTEGER,
+	_payment_type VARCHAR(20),
+	_payment_date DATE,
+	_total_amount NUMERIC(6,2),
+	_part_id INTEGER,
+	_staff_id INTEGER,
+	_car_serial INTEGER
+)
+RETURNS void
+--Declaration
+AS $MAIN$
+	BEGIN
+-- BODY
+		INSERT INTO invoice(invoice_id, invoice_type, customer_id, payment_id, payment_type, payment_date, total_amount, part_id, staff_id, car_serial)
+		VALUES(_invoice_id, _invoice_type, _customer_id, _payment_id, _payment_type, _payment_date, _total_amount, _part_id, _staff_id, _car_serial);
+	END;
+$MAIN$
+LANGUAGE plpgsql;
